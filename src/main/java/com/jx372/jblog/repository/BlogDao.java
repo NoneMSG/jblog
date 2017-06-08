@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jx372.jblog.vo.BlogVo;
+import com.jx372.jblog.vo.CategoryVo;
+import com.jx372.jblog.vo.PostVo;
 
 @Repository
 public class BlogDao {
@@ -18,21 +20,21 @@ public class BlogDao {
 
 	public Map<String, Object> mainView(Long userNo) {
 		BlogVo blogVo = sqlSession.selectOne("blog.viewBlogMain", userNo);
-		
+		blogVo.setUserNo(userNo);
 		Map<String, Object> map = new  HashMap<String, Object>();
-		map.put("categoryList", categoryList());
-		map.put("postList", postList());
+		map.put("categoryList", categoryList(userNo));
+		map.put("postList", postList(userNo));
 		map.put("blogVo",blogVo);
 		return map;
 	}
 
-	public List<BlogVo> categoryList() {
-		List<BlogVo> list = sqlSession.selectList("blog.viewCategory");
+	public List<CategoryVo> categoryList(Long userNo) {
+		List<CategoryVo> list = sqlSession.selectList("blog.viewCategory",userNo);
 		return list;
 	}
 
-	public List<BlogVo> postList() {
-		List<BlogVo> list = sqlSession.selectList("blog.viewPost");
+	public List<PostVo> postList(Long userNo) {
+		List<PostVo> list = sqlSession.selectList("blog.viewPost",userNo);
 		return list;
 	}
 

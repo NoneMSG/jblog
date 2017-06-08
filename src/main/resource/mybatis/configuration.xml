@@ -12,6 +12,8 @@
 	<typeAlias alias="uservo" type="com.jx372.jblog.vo.UserVo" />
 	<typeAlias alias="adminvo" type="com.jx372.jblog.vo.AdminVo" />
 	<typeAlias alias="blogvo" type="com.jx372.jblog.vo.BlogVo" />
+	<typeAlias alias="postvo" type="com.jx372.jblog.vo.PostVo" />
+	<typeAlias alias="categoryvo" type="com.jx372.jblog.vo.CategoryVo" />
 	
 </typeAliases>
 

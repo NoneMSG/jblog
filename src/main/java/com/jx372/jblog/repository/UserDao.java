@@ -23,7 +23,7 @@ public class UserDao {
 	
 	private boolean createBlog(UserVo userVo){
 		String blogTitle = userVo.getName()+"의 블로그";
-		String logoPath = "/jblog/assets/images/spring-logo.jpg";
+		String logoPath = "/assets/images/spring-logo.jpg";
 		
 		Long userNo = userVo.getNo();
 		Map<String, String> map = new HashMap<String, String>();
@@ -32,6 +32,11 @@ public class UserDao {
 		map.put("logoPath", logoPath);
 		
 		int count = sqlSession.insert("blog.createBlog",map);
+		createCategory(userNo);
+		return count==1;
+	}
+	private boolean createCategory(Long userNo){
+		int count =sqlSession.insert("blog.createDefaultCategory",userNo);
 		return count==1;
 	}
 

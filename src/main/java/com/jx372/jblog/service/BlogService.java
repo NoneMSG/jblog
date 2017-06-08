@@ -16,7 +16,6 @@ public class BlogService {
 	private BlogDao blogDao;
 	
 	public Map<String, Object> getMainView(Long userNo) {
-		
 		return blogDao.mainView(userNo);
 	}
 

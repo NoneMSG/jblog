@@ -7,7 +7,6 @@
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 				select last_insert_id()
 		</selectKey>
-		
 		<![CDATA[
 			insert
 				into user
