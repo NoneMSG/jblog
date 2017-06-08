@@ -12,13 +12,11 @@
 <body>
 	<div id="container">
 		<div id="header">
+		
 			<h1>Spring 이야기</h1>
-			<ul>
-				<li><a href="">로그인</a></li>
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">블로그 관리</a></li>
-			</ul>
+			<c:import url="/WEB-INF/views/include/blogMenu.jsp" />
 		</div>
+		
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
@@ -36,6 +34,8 @@
 					<li><a href="">Spring Security 설정법</a> <span>2015/05/02</span>	</li>
 					<li><a href="">JPA + Hinernate</a> <span>2015/05/02</span>	</li>
 					<li><a href="">AOP 활용하기 - DAO 실행시간 측정하기</a> <span>2015/05/02</span>	</li>
+					
+					
 				</ul>
 			</div>
 		</div>
@@ -57,9 +57,7 @@
 		</div>
 		
 		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
+			<c:import url="/WEB-INF/views/include/blogFoot.jsp" />
 		</div>
 	</div>
 </body>

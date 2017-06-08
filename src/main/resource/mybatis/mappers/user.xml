@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	
+	<insert id="createUser" parameterType="uservo">
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+				select last_insert_id()
+		</selectKey>
+		
+		<![CDATA[
+			insert
+				into user
+			values (#{no}, #{id}, #{name}, password(#{password}), now() )
+		]]>
+	</insert>
+	
+	<select id="userInfo" parameterType="map" resultType="uservo">
+		<![CDATA[
+			select no, name, id
+				from user 
+				where id=#{id} 
+				and 
+				password=password(#{password})
+		]]>
+	</select>
+	
+	
+</mapper>
