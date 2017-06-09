@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jx372.jblog.repository.BlogDao;
+import com.jx372.jblog.vo.PostVo;
 
 @Service
 public class BlogService {
@@ -17,6 +18,10 @@ public class BlogService {
 	
 	public Map<String, Object> getMainView(Long userNo) {
 		return blogDao.mainView(userNo);
+	}
+
+	public PostVo getPosts(Map<String, Long> map) {
+		return blogDao.postView(map);
 	}
 
 }

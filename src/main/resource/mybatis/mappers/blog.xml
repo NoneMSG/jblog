@@ -34,19 +34,27 @@
 	<select id="viewCategory" parameterType="long" resultType="categoryvo">
 	<![CDATA[
 			select c.name as name, c.no as no, c.user_no as userNo, c.description as description, date_format(c.reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate
-			from blog b, category c 
-			where c.user_no=#{userNo} and
-			c.user_no=#{userNo}
+			from category c 
+			where c.user_no=#{userNo}
+			order by regDate desc 
 		]]>
 	</select>
 
-	<select id="viewPost" parameterType="long" resultType="postvo">
+	<select id="viewPostList" parameterType="long" resultType="postvo">
 	<![CDATA[
-			select c.no as categoryNo, p.no as no, p.content as content ,p.title as title , date_format(p.reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate
+			select c.user_no as userNo, c.no as categoryNo, p.no as no, p.content as content ,p.title as title , date_format(p.reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate
 			from post p, category c
 			where c.no=p.category_no and
 			c.user_no=#{userNo}
 			order by regDate desc
+		]]>
+	</select>
+	
+	<select id="viewPost" parameterType="map" resultType="postvo">
+	<![CDATA[
+			select p.title as title , p.content as content, c.name as categoryName
+			from post p, category c
+			where p.no=#{postNo} and c.no=#{categoryNo} 
 		]]>
 	</select>
 

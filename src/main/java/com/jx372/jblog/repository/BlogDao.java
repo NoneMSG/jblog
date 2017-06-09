@@ -34,8 +34,13 @@ public class BlogDao {
 	}
 
 	public List<PostVo> postList(Long userNo) {
-		List<PostVo> list = sqlSession.selectList("blog.viewPost",userNo);
+		List<PostVo> list = sqlSession.selectList("blog.viewPostList",userNo);
 		return list;
+	}
+
+	public PostVo postView(Map<String,Long> map) {		
+		PostVo postVo = sqlSession.selectOne("blog.viewPost", map);
+		return postVo;
 	}
 
 }
