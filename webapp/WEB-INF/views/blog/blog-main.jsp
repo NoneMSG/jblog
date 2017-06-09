@@ -46,7 +46,7 @@
 			<h2>카테고리</h2>
 			<ul>
 			<c:forEach items="${map.categoryList }" var="category" varStatus="status">
-				<li><a href="">${category.name }</a></li>
+				<li><a href="${pageContext.request.contextPath}/blog/categoryList/${category.userNo}/${category.no}">${category.name }</a></li>
 			</c:forEach>
 			</ul>
 		</div>

@@ -1,6 +1,7 @@
 package com.jx372.jblog.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,21 @@ public class BlogController {
 			PostVo postVo = blogService.getPosts(contentsMap);
 			
 			mainMap.put("postView", postVo);
-			System.out.println(mainMap.get("postView"));
+			//System.out.println(mainMap.get("postView"));
 			model.addAttribute("map",mainMap);
+			
+			return "/blog/blog-main";
+		}
+		
+		@RequestMapping("/categoryList/{uno}/{cno}")
+		public String viewMainByCategory(
+				@PathVariable("uno")Long userNo,
+				@PathVariable("cno")Long categoryNo,
+				Model model){
+			Map<String, Object> map= blogService.getMainView(userNo);
+			List<PostVo> plist = blogService.getPostList(categoryNo,userNo);
+			map.put("postList", plist);
+			model.addAttribute("map",map);
 			
 			return "/blog/blog-main";
 		}

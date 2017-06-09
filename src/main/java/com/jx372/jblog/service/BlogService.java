@@ -1,5 +1,6 @@
 package com.jx372.jblog.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class BlogService {
 
 	public PostVo getPosts(Map<String, Long> map) {
 		return blogDao.postView(map);
+	}
+
+	public List<PostVo> getPostList(Long categoryNo,Long userNo) {
+		return blogDao.postListByCategoryNo(categoryNo, userNo);
 	}
 
 }

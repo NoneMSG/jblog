@@ -50,6 +50,16 @@
 		]]>
 	</select>
 	
+	<select id="viewPostListByNo" parameterType="map" resultType="postvo">
+	<![CDATA[
+			select c.user_no as userNo, c.no as categoryNo, p.no as no, p.content as content ,p.title as title , date_format(p.reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate
+			from post p, category c
+			where #{categoryNo}=p.category_no and
+			c.user_no=#{userNo}
+			order by regDate desc
+		]]>
+	</select>
+	
 	<select id="viewPost" parameterType="map" resultType="postvo">
 	<![CDATA[
 			select p.title as title , p.content as content, c.name as categoryName

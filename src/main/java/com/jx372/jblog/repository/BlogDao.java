@@ -43,4 +43,12 @@ public class BlogDao {
 		return postVo;
 	}
 
+	public List<PostVo> postListByCategoryNo(Long categoryNo, Long userNo) {
+		Map<String, Long> map = new  HashMap<String, Long>();
+		map.put("categoryNo", categoryNo);
+		map.put("userNo", userNo);
+		List<PostVo> list = sqlSession.selectList("blog.viewPostListByNo",map);
+		return list;
+	}
+
 }
