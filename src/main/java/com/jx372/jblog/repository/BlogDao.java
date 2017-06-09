@@ -27,6 +27,7 @@ public class BlogDao {
 		map.put("blogVo",blogVo);
 		return map;
 	}
+	
 
 	public List<CategoryVo> categoryList(Long userNo) {
 		List<CategoryVo> list = sqlSession.selectList("blog.viewCategory",userNo);

@@ -20,6 +20,11 @@ public class AdminService {
 	
 	@Autowired
 	private AdminDao adminDao;
+
+	public void getWritingPost(AdminVo adminVo) {
+		adminDao.insertPost(adminVo);
+		
+	}
 	
 	public void addCategory(AdminVo adminVo) {
 		adminDao.addCategory(adminVo);
@@ -84,5 +89,6 @@ public class AdminService {
 		fos.write(fileData);
 		fos.close();
 	}
+
 
 }

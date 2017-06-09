@@ -6,9 +6,18 @@ public class AdminVo {
 	private Long categoryNo;
 	private Long postCount;
 	private String title;
+	private String content;
 	private String logoPath;
 	private String categoryName;
 	private String categoryDisc;
+	
+	
+	@Override
+	public String toString() {
+		return "AdminVo [userNo=" + userNo + ", categoryNo=" + categoryNo + ", postCount=" + postCount + ", title="
+				+ title + ", content=" + content + ", logoPath=" + logoPath + ", categoryName=" + categoryName
+				+ ", categoryDisc=" + categoryDisc + "]";
+	}
 	public final Long getUserNo() {
 		return userNo;
 	}
@@ -51,11 +60,11 @@ public class AdminVo {
 	public final void setCategoryDisc(String categoryDisc) {
 		this.categoryDisc = categoryDisc;
 	}
-	@Override
-	public String toString() {
-		return "AdminVo [userNo=" + userNo + ", categoryNo=" + categoryNo + ", postCount=" + postCount + ", title="
-				+ title + ", logoPath=" + logoPath + ", categoryName=" + categoryName + ", categoryDisc=" + categoryDisc
-				+ "]";
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	

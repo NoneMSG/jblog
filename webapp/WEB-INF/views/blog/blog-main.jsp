@@ -29,7 +29,7 @@
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${map.postList }" var="posting" varStatus="status">
-						<li><a href="${pageContext.request.contextPath}/blog/blog-main/${posting.userNo }/${posting.no }/${posting.categoryNo}">${posting.title }</a> <span>${posting.regDate }</span>
+						<li><a href="${pageContext.request.contextPath}/blog/blog-main/${posting.userNo }/${posting.no }/${posting.categoryNo}">${posting.no}${posting.title }</a> <span>${posting.regDate }</span>
 						</li>
 					</c:forEach>
 				</ul>

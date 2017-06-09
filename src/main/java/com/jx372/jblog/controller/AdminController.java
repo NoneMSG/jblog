@@ -73,14 +73,21 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/blog/blog-admin-write")
-	public String write(){
+	public String write(@AuthUser UserVo authUser,
+			Model model){
+		List<AdminVo> list =adminService.getCategoryList(authUser.getNo());
+		model.addAttribute("categoryList",list);
 		return "/blog/blog-admin-write";
 	}
 	
 	
 	@RequestMapping(value="/blog/blog-admin-write", method=RequestMethod.POST)
-	public String write(Model model){
-		return "redirect:/blog/blog-main";
+	public String write(@ModelAttribute AdminVo adminVo,
+			@AuthUser UserVo authUser ){
+		System.out.println(adminVo);
+		adminService.getWritingPost(adminVo);
+		//return "/blog/blog-admin-write";
+		return "redirect:/blog/blog-main/"+authUser.getNo();
 	}
 	
 	

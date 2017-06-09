@@ -28,11 +28,12 @@ public class AdminDao {
 		List<AdminVo> list = sqlSession.selectList("blog.cateList", userNo);
 		return list;
 	}
-	private Long getPostCountInCategory(){
-		return 0L;
-	}
 	public void addCategory(AdminVo adminVo) {
 		sqlSession.insert("blog.insetCategory",adminVo);
+	}
+
+	public void insertPost(AdminVo adminVo) {
+		sqlSession.insert("blog.insertPost",adminVo);
 	}
 
 }

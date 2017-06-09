@@ -3,13 +3,13 @@
 
 <mapper namespace="blog">
 
-	<select id="cateList" parameterType="long" resultType="adminvo">
-	<![CDATA[
-			select c.no as categoryNo, c.name as categoryName, c.description as categoryDisc, 
-			(select count(*)from post,category where category_no=c.no and user_no=#{userNo}) as postCount 
-			from category c where c.user_no=#{userNo}  
+	<insert id="insertPost" parameterType="adminvo">
+		<![CDATA[
+			insert
+				into post
+			values (null, #{categoryNo}, #{title}, #{content}, now() )
 		]]>
-	</select>
+	</insert>
 
 	<insert id="createBlog" parameterType="map">
 		<![CDATA[
@@ -26,7 +26,7 @@
 			values (null, #{userNo}, #{categoryName}, #{categoryDisc}, now())
 		]]>
 	</insert>
-	
+
 	<insert id="createDefaultCategory" parameterType="long">
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 			select
@@ -46,7 +46,15 @@
 			where user_no=#{userNo}
 		]]>
 	</select>
-
+	
+	<select id="cateList" parameterType="long" resultType="adminvo">
+		<![CDATA[
+			select c.no as categoryNo, c.name as categoryName, c.description as categoryDisc, 
+			(select count(*)from post where category_no=categoryNo ) as postCount 
+			from category c where c.user_no=#{userNo}  
+		]]>
+	</select>
+	
 	<select id="blogInfoByNo" parameterType="long" resultType="blogvo">
 	<![CDATA[
 			select user_no as userNo, title, log as logopath
@@ -82,16 +90,16 @@
 
 	<select id="viewPostListByNo" parameterType="map" resultType="postvo">
 	<![CDATA[
-			select c.user_no as userNo, c.no as categoryNo, p.no as no, p.content as content ,p.title as title , date_format(p.reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate
-			from post p, category c
-			where p.category_no=c.no and c.user_no=#{userNo}
-			order by regDate desc
+			select title, content, date_format(reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate,
+			
+			from post where category_no=#{categoryNo} order by regDate desc
 		]]>
 	</select>
 
 	<select id="viewPost" parameterType="map" resultType="postvo">
 	<![CDATA[
-			select p.title as title , p.content as content, c.name as categoryName
+			select p.title as title , p.content as content, c.name as categoryName,
+			c.user_no as userNo, c.no as categoryNo
 			from post p, category c
 			where p.no=#{postNo} and c.no=#{categoryNo} 
 		]]>

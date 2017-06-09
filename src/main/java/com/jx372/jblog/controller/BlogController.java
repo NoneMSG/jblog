@@ -52,21 +52,25 @@ public class BlogController {
 			PostVo postVo = blogService.getPosts(contentsMap);
 			
 			mainMap.put("postView", postVo);
-			//System.out.println(mainMap.get("postView"));
+			System.out.println("==========================");
+			System.out.println(mainMap.get("postView"));
 			model.addAttribute("map",mainMap);
 			
 			return "/blog/blog-main";
 		}
-		
+		//카테고리 선택시 보여주는
 		@RequestMapping("/categoryList/{uno}/{cno}")
 		public String viewMainByCategory(
 				@PathVariable("uno")Long userNo,
 				@PathVariable("cno")Long categoryNo,
 				Model model){
 			Map<String, Object> map= blogService.getMainView(userNo);
+			System.out.println("postList=========");
+			System.out.println(map.get("postList"));
 			List<PostVo> plist = blogService.getPostList(categoryNo,userNo);
 			map.put("postList", plist);
-			System.out.println(map.get("postList"));
+			System.out.println("=================");
+			System.out.println(plist);
 			model.addAttribute("map",map);
 			
 			return "/blog/blog-main";
