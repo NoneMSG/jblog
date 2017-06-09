@@ -51,6 +51,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 			return false;
 		}
 		//검증이 되었으면 허가
+		
 		return true;
 	}
 

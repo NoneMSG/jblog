@@ -66,6 +66,7 @@ public class BlogController {
 			Map<String, Object> map= blogService.getMainView(userNo);
 			List<PostVo> plist = blogService.getPostList(categoryNo,userNo);
 			map.put("postList", plist);
+			System.out.println(map.get("postList"));
 			model.addAttribute("map",map);
 			
 			return "/blog/blog-main";
