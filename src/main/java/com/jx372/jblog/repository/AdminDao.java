@@ -1,6 +1,8 @@
 package com.jx372.jblog.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,14 @@ public class AdminDao {
 
 	public void insertPost(AdminVo adminVo) {
 		sqlSession.insert("blog.insertPost",adminVo);
+	}
+
+	public List<AdminVo> getCategoryListAjax(Long userNo, Long startNo) {
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put("userNo", userNo);
+		map.put("startNo", startNo);
+		List<AdminVo> list = sqlSession.selectList("blog.cateListAjax",map);
+		return list;
 	}
 
 }

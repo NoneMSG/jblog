@@ -90,5 +90,10 @@ public class AdminService {
 		fos.close();
 	}
 
+	public List<AdminVo> getCategoryListAjax(Long no, Long startNo) {
+		
+		return adminDao.getCategoryListAjax(no, startNo);
+	}
+
 
 }

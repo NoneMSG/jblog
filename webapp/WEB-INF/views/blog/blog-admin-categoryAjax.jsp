@@ -12,68 +12,18 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-
 var isEnd = false;
-
-var render =function(vo,mode){
-	var html=
-		"<tr id='sno' data-no='"+vo.categoryNo+"'>"+
-		"<td>"+vo.categoryNo+"</td>"+
-		"<td>"+vo.categoryName+"</td>"+
-		"<td>"+vo.postCount+"</td>"+
-		"<td>"+vo.categoryDisc+"</td>"+
-		"<td>Delete</td>"+
-		"</tr>"	;
-		
-		if(mode === true){
-			$("#list-category").prepend(html);
-		}else{
-			$("#list-category").after(html);
-		}
-		
-}
 
 var fetchList = function(){
 	if(isEnd===true){
 		return;
 	}
-	var startNo = $("#sno").data("no") || 0;
-	
-	$.ajax({
-		url:"${pageContext.request.contextPath}/blog/api/blog-admin-category?sno="+startNo,
-		type:"get",
-		dataType:"json",
-		data:"",
-		success:function(response){
-			if(response.result==="fail"){
-				console.error(response.message);
-				return;
-			}
-			
-			//detect
-			if(response.data.length < 5){
-				isEnd=true;
-				$("#next-btn").prop("disabled",true);
-				$("#next-btn").hide();
-			}
-			
-			//rendering
-			$.each(response.data, function(index, vo){
-				render(vo, false);
-			});
-		},
-		error:function(jqXHR,status,e){
-			console.log(status+":"+e);
-		}
-	});
 }
 
 $(function(){
 	$("#next-btn").click(function(){
-		fetchList();
+		console.log("1");
 	});
-	//기본렌더링
-	fetchList();
 });
 
 </script>
@@ -91,14 +41,22 @@ $(function(){
 				</ul>
 				<button id="next-btn">next</button>
 		      	<table class="admin-cat">
-		      		<tr id="list-category">
+		      		<tr>
 		      			<th>번호</th>
 		      			<th>카테고리명</th>
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
-		      			  
+		      		<c:forEach items="${categoryList }" var="list" varStatus="status">
+						<tr>
+							<td>${list.categoryNo }</td>
+							<td>${list.categoryName }</td>
+							<td>${list.postCount }</td>
+							<td>${list.categoryDisc }</td>
+							<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+						</tr>  
+					</c:forEach>	  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>

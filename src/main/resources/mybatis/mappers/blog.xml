@@ -41,7 +41,7 @@
 
 	<select id="viewBlogMain" parameterType="long" resultType="blogvo">
 	<![CDATA[
-			select title, log as logopath
+			select title, logo_path as logopath
 			from blog 
 			where user_no=#{userNo}
 		]]>
@@ -55,9 +55,26 @@
 		]]>
 	</select>
 	
+	<select id="cateListAjax" parameterType="map" resultType="adminvo">
+		<![CDATA[
+			select c.no as categoryNo, c.name as categoryName, c.description as categoryDisc, 
+			(select count(*)from post where category_no=categoryNo ) as postCount 
+			from category c where c.user_no=#{userNo} 
+		]]>
+		<if test="startNo>0">
+		<![CDATA[
+			and c.no < #{startNo}
+		]]>
+		</if>
+		<![CDATA[	
+			order by c.no desc
+            limit 0, 5
+		]]>
+	</select>
+	
 	<select id="blogInfoByNo" parameterType="long" resultType="blogvo">
 	<![CDATA[
-			select user_no as userNo, title, log as logopath
+			select user_no as userNo, title, logo_path as logopath
 			from blog 
 			where user_no=#{userNo}
 		]]>
@@ -65,7 +82,7 @@
 
 	<select id="blogInfoUpdate" parameterType="blogvo"> 
 	<![CDATA[
-		update blog set title=#{title}, log=#{logoPath} where user_no=#{userNo}
+		update blog set title=#{title}, logo_path=#{logoPath} where user_no=#{userNo}
 	]]>
 	</select>
 
@@ -90,8 +107,7 @@
 
 	<select id="viewPostListByNo" parameterType="map" resultType="postvo">
 	<![CDATA[
-			select title, content, date_format(reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate,
-			
+			select title, content, date_format(reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate			
 			from post where category_no=#{categoryNo} order by regDate desc
 		]]>
 	</select>
